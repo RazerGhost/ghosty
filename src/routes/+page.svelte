@@ -1,28 +1,7 @@
 <script lang="ts">
-	import discordpf from '$lib/assets/discordpf.png';
-	import * as Avatar from '$lib/components/ui/avatar/';
 	import * as Card from '$lib/components/ui/card';
 	import * as Tabs from '$lib/components/ui/tabs';
-	import { Button } from '$lib/components/ui/button';
-	import * as Tooltip from '$lib/components/ui/tooltip';
-	import * as Popover from '$lib/components/ui/popover';
-	import {
-		IconBrandGithub,
-		IconBrandLinkedin,
-		IconBrandInstagram,
-		IconBrandDiscord,
-		IconBrandSpotify,
-		IconBrandFigma,
-		IconDeviceTv,
-		IconDeviceGamepad2,
-		IconMusic,
-		IconTerminal2,
-		IconBrandHtml5,
-		IconBrandCss3,
-		IconBrandJavascript,
-		IconBrandPhp,
-		IconBrandTypescript
-	} from '@tabler/icons-svelte';
+	import Github from '$lib/components/github.svelte';
 </script>
 
 <svelte:head>
@@ -62,10 +41,7 @@
 	<Tabs.Content value="projects">
 		<Card.Root class="h-full">
 			<Card.Content>
-				<h2 class="text-2xl font-bold xl:text-3xl">Projects</h2>
-				<div class="flex flex-col space-y-4">
-					<h1>WIP</h1>
-				</div>
+				<Github />
 			</Card.Content>
 		</Card.Root>
 	</Tabs.Content>
