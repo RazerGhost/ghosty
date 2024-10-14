@@ -6,8 +6,8 @@
 
 <ModeWatcher />
 <div class="flex flex-col">
-    <div class=" absolute right-0 top-0 p-5">
-        <Themetoggle />
-    </div>
+	<div class="flex justify-end p-6 xl:absolute xl:right-0 xl:top-0">
+		<Themetoggle />
+	</div>
 	<slot />
 </div>
