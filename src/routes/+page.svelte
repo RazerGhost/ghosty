@@ -2,6 +2,7 @@
 	import * as Card from '$lib/components/ui/card';
 	import * as Tabs from '$lib/components/ui/tabs';
 	import Github from '$lib/components/github.svelte';
+	import Spotify from '$lib/components/spotify.svelte';
 </script>
 
 <svelte:head>
@@ -48,10 +49,7 @@
 	<Tabs.Content value="spotify">
 		<Card.Root class="h-full">
 			<Card.Content>
-				<h2 class="text-2xl font-bold xl:text-3xl">Spotify</h2>
-				<div class="flex flex-col space-y-4">
-					<h1>WIP</h1>
-				</div>
+				<Spotify />
 			</Card.Content>
 		</Card.Root>
 	</Tabs.Content>

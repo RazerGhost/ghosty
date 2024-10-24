@@ -22,7 +22,6 @@
 			error = 'Error fetching data';
 		}
 	};
-
 	// Fetch data on component load
 	fetchData();
 </script>
