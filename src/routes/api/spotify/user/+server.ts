@@ -1,20 +1,19 @@
-
 import type { RequestHandler } from '@sveltejs/kit';
+import { fetchSpotifyToken } from '../token/+server';
 
-export const GET: RequestHandler = async ($token) => {
-	const url = `https://api.spotify.com/v1/me`;
+export const GET: RequestHandler = async () => {
+	try {
+		const token = await fetchSpotifyToken();
 
-	const response = await fetch(url, {
-        method: 'GET',
-		headers: {
-			Authorization: `Bearer ${$token}`,
-		}
-	});
 
-	if (response.ok) {
+		const response = await fetch('https://api.spotify.com/v1/me', {
+			headers: { Authorization: `Bearer ${token}` }
+		});
+
+		if (!response.ok) throw new Error('Failed to fetch user data');
 		const data = await response.json();
 		return new Response(JSON.stringify(data), { status: 200 });
-	} else {
-		return new Response(JSON.stringify({ error: 'Failed to fetch user data' }), { status: 500 });
+	} catch (error) {
+		return new Response(JSON.stringify({ error: 'User fetch failed' }), { status: 500 });
 	}
 };

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	let user: any = {};
 	let topTracks: any = [];
 	let topArtists: any = [];
@@ -6,40 +7,29 @@
 
 	const fetchData = async () => {
 		try {
-			const TokenRes = await fetch('api/spotify/token');
-			if (TokenRes.ok) {
-                console.log(TokenRes);
-				const { access_token } = await TokenRes.json();
-				localStorage.setItem('spotify_token', access_token);
+			const [userRes, topTracksRes, topArtistsRes] = await Promise.all([
+				fetch('/api/spotify/user'),
+				fetch('/api/spotify/top-tracks'),
+				fetch('/api/spotify/top-artists')
+			]);
 
-				try {
-					const [userRes, topTracksRes, topArtistsRes] = await Promise.all([
-						fetch('api/spotify/user', access_token),
-						fetch('api/spotify/top-tracks', access_token),
-						fetch('api/spotify/top-artists', access_token)
-					]);
-					if (userRes.ok && topTracksRes.ok && topArtistsRes.ok) {
-						user = await userRes.json();
-						topTracks = await topTracksRes.json();
-						topArtists = await topArtistsRes.json();
-					} else {
-						error = 'Failed to load data';
-					}
-				} catch (e) {
-					error = 'Error fetching data';
-				}
+			if (userRes.ok && topTracksRes.ok && topArtistsRes.ok) {
+				user = await userRes.json();
+				topTracks = await topTracksRes.json();
+				topArtists = await topArtistsRes.json();
 			} else {
-				error = 'Failed to get token';
+				error = 'Failed to load data';
 			}
 		} catch (e) {
-			error = 'Error fetching token';
+			error = 'Error fetching data';
 		}
 	};
 
-	fetchData();
+	onMount(() => {
+		fetchData();
+	});
 </script>
 
-<!-- Display User Info -->
 {#if user && topTracks.length > 0 && topArtists.length > 0}
 	<div>
 		<h2>{user.display_name}'s Spotify Profile</h2>
