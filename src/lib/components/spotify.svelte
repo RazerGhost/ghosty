@@ -12,7 +12,7 @@
 				fetch('/api/spotify/top-tracks'),
 				fetch('/api/spotify/top-artists')
 			]);
-
+            console.log(userRes, topTracksRes, topArtistsRes);
 			if (userRes.ok && topTracksRes.ok && topArtistsRes.ok) {
 				user = await userRes.json();
 				topTracks = await topTracksRes.json();

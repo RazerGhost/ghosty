@@ -49,7 +49,8 @@
 	<Tabs.Content value="spotify">
 		<Card.Root class="h-full">
 			<Card.Content>
-				<Spotify />
+				WIP
+				<!-- <Spotify /> -->
 			</Card.Content>
 		</Card.Root>
 	</Tabs.Content>

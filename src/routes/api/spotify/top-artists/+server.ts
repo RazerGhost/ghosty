@@ -1,9 +1,8 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { fetchSpotifyToken } from '../token/+server';
 
 export const GET: RequestHandler = async () => {
 	try {
-		const token = await fetchSpotifyToken();
+		const token = false;
 		const url = `https://api.spotify.com/v1/me/top/artists`;
 
 		const response = await fetch(url, {

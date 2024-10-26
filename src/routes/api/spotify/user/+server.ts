@@ -1,10 +1,8 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { fetchSpotifyToken } from '../token/+server';
 
 export const GET: RequestHandler = async () => {
 	try {
-		const token = await fetchSpotifyToken();
-
+		const token = false;
 
 		const response = await fetch('https://api.spotify.com/v1/me', {
 			headers: { Authorization: `Bearer ${token}` }
