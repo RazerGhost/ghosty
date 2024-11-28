@@ -43,7 +43,7 @@
 	</div>
 	<div class="flex flex-col items-start justify-center gap-12 p-6 xl:h-screen xl:flex-row xl:p-36">
 		<div
-			class="flex w-full flex-col space-y-6 overflow-hidden rounded-lg border border-neutral-800 p-6 shadow-lg sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/6"
+			class="flex w-full flex-col space-y-6 overflow-hidden rounded-lg border p-6 shadow-lg lg:w-1/3 xl:w-1/6"
 		>
 			<div class="flex flex-col items-center">
 				<Avatar.Root class="size-20 rounded-full border border-gray-700">
@@ -132,7 +132,7 @@
 
 			<hr class="w-full border-t border-gray-600" />
 
-			<div class="flex self-center">
+			<div class="flex-auto self-center">
 				<Button variant="ghost" size="icon" href="https://github.com/RazerGhost" target="_blank">
 					<IconBrandGithub size={26} class="text-black dark:text-white" />
 				</Button>
