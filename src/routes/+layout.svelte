@@ -4,11 +4,10 @@
 	import Themetoggle from '$lib/components/themetoggle.svelte';
 	import discordpf from '$lib/assets/discordpf.png';
 	import * as Avatar from '$lib/components/ui/avatar/';
-	import * as Card from '$lib/components/ui/card';
-	import * as Tabs from '$lib/components/ui/tabs';
 	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import * as Dialog from '$lib/components/ui/dialog';
+	import { Separator } from '$lib/components/ui/separator';
 	import {
 		IconBrandGithub,
 		IconBrandLinkedin,
@@ -41,7 +40,7 @@
 	<div class="flex justify-end p-6 xl:absolute xl:right-0 xl:top-0">
 		<Themetoggle />
 	</div>
-	<div class="flex flex-col items-start justify-center gap-12 p-6 xl:h-screen xl:flex-row xl:p-36">
+	<div class="flex flex-col items-start justify-center gap-10 p-6 xl:h-screen xl:flex-row  xl:p-20">
 		<div
 			class="flex w-full flex-col space-y-6 overflow-hidden rounded-lg border p-6 shadow-lg lg:w-1/3 xl:w-1/6"
 		>
@@ -53,37 +52,37 @@
 				<h1 class="mt-4 text-xl font-bold sm:text-2xl lg:text-xl">Dimitri de Jong</h1>
 			</div>
 
-			<hr class="w-full border-t border-gray-600" />
+			<Separator />
 
-			<div class="space-y-4 text-sm text-black dark:text-gray-300">
+			<div class="space-y-4 text-sm dark:text-gray-300">
 				<p>
-					<span class="font-semibold text-gray-600 dark:text-cyan-400">Age:</span>
+					<span class="font-semibold dark:text-cyan-400">Age:</span>
 					{calculateAge()}
 				</p>
 				<p>
-					<span class="font-semibold text-gray-600 dark:text-cyan-400">Occupation:</span> Fullstack Developer
+					<span class="font-semibold dark:text-cyan-400">Occupation:</span> Fullstack Developer
 				</p>
 				<p>
-					<span class="font-semibold text-gray-600 dark:text-cyan-400">Education:</span> Game Development
+					<span class="font-semibold dark:text-cyan-400">Education:</span> Game Development
 				</p>
 
-				<p><span class="font-semibold text-gray-600 dark:text-cyan-400">Interests:</span></p>
+				<p><span class="font-semibold dark:text-cyan-400">Interests:</span></p>
 				<div class="flex-auto">
 					<Tooltip.Root>
 						<Tooltip.Trigger>
-							<IconMusic size={28} class="text-black dark:text-white" />
+							<IconMusic size={28} />
 						</Tooltip.Trigger>
 						<Tooltip.Content>Music</Tooltip.Content>
 					</Tooltip.Root>
 					<Tooltip.Root>
 						<Tooltip.Trigger>
-							<IconDeviceGamepad2 size={28} class="text-black dark:text-white" />
+							<IconDeviceGamepad2 size={28} />
 						</Tooltip.Trigger>
 						<Tooltip.Content>Gaming</Tooltip.Content>
 					</Tooltip.Root>
 					<Tooltip.Root>
 						<Tooltip.Trigger>
-							<IconTerminal2 size={28} class="text-black dark:text-white" />
+							<IconTerminal2 size={28} />
 						</Tooltip.Trigger>
 						<Tooltip.Content>Programming</Tooltip.Content>
 					</Tooltip.Root>
@@ -93,52 +92,52 @@
 				<div class="flex-auto">
 					<Tooltip.Root>
 						<Tooltip.Trigger>
-							<IconBrandHtml5 size={32} class="text-black dark:text-white" />
+							<IconBrandHtml5 size={32} />
 						</Tooltip.Trigger>
 						<Tooltip.Content>HTML</Tooltip.Content>
 					</Tooltip.Root>
 					<Tooltip.Root>
 						<Tooltip.Trigger>
-							<IconBrandCss3 size={32} class="text-black dark:text-white" />
+							<IconBrandCss3 size={32} />
 						</Tooltip.Trigger>
 						<Tooltip.Content>CSS</Tooltip.Content>
 					</Tooltip.Root>
 					<Tooltip.Root>
 						<Tooltip.Trigger>
-							<IconBrandPhp size={32} class="text-black dark:text-white" />
+							<IconBrandPhp size={32} />
 						</Tooltip.Trigger>
 						<Tooltip.Content>PHP</Tooltip.Content>
 					</Tooltip.Root>
 					<Tooltip.Root>
 						<Tooltip.Trigger>
-							<IconBrandJavascript size={32} class="text-black dark:text-white" />
+							<IconBrandJavascript size={32} />
 						</Tooltip.Trigger>
 						<Tooltip.Content>JavaScript</Tooltip.Content>
 					</Tooltip.Root>
 					<Tooltip.Root>
 						<Tooltip.Trigger>
-							<IconBrandTypescript size={32} class="text-black dark:text-white" />
+							<IconBrandTypescript size={32} />
 						</Tooltip.Trigger>
 						<Tooltip.Content>TypeScript</Tooltip.Content>
 					</Tooltip.Root>
 					<Tooltip.Root>
 						<Tooltip.Trigger>
-							<IconBrandFigma size={32} class="text-black dark:text-white" />
+							<IconBrandFigma size={32} />
 						</Tooltip.Trigger>
 						<Tooltip.Content>Figma</Tooltip.Content>
 					</Tooltip.Root>
 				</div>
 			</div>
 
-			<hr class="w-full border-t border-gray-600" />
+			<Separator />
 
 			<div class="flex-auto self-center">
 				<Button variant="ghost" size="icon" href="https://github.com/RazerGhost" target="_blank">
-					<IconBrandGithub size={26} class="text-black dark:text-white" />
+					<IconBrandGithub size={26} />
 				</Button>
 				<Dialog.Root class="col-span-1">
 					<Dialog.Trigger class={buttonVariants({ variant: 'ghost', size: 'icon' })}>
-						<IconBrandDiscord size={26} class="text-black dark:text-white" />
+						<IconBrandDiscord size={26} />
 					</Dialog.Trigger>
 					<Dialog.Content>
 						<Dialog.Header>
@@ -157,7 +156,7 @@
 					href="https://open.spotify.com/user/sc8l2c989xkpofg2a7ypjnpm4?si=f82637894a8143b3"
 					target="_blank"
 				>
-					<IconBrandSpotify size={26} class="text-black dark:text-white" />
+					<IconBrandSpotify size={26} />
 				</Button>
 				<Button
 					variant="ghost"
@@ -165,7 +164,7 @@
 					href="https://www.linkedin.com/in/dimitri-eleazar-de-jong/"
 					target="_blank"
 				>
-					<IconBrandLinkedin size={26} class="text-black dark:text-white" />
+					<IconBrandLinkedin size={26} />
 				</Button>
 				<Button
 					variant="ghost"
@@ -173,7 +172,7 @@
 					href="https://www.instagram.com/dl1mltrl/"
 					target="_blank"
 				>
-					<IconBrandInstagram size={26} class="text-black dark:text-white" />
+					<IconBrandInstagram size={26} />
 				</Button>
 				<Button
 					variant="ghost"
@@ -181,12 +180,12 @@
 					href="https://mydramalist.com/profile/RazerGhost"
 					target="_blank"
 				>
-					<IconDeviceTv size={26} class="text-black dark:text-white" />
+					<IconDeviceTv size={26} />
 				</Button>
 			</div>
 		</div>
 
-		<div class="flex h-full w-full flex-col justify-center xl:w-5/6">
+		<div class=" w-full xl:w-5/6">
 			<slot />
 		</div>
 	</div>

@@ -11,12 +11,12 @@
 
 <Tabs.Root value="about" class="h-full">
 	<Tabs.List class="mb-4 flex justify-around">
-		<Tabs.Trigger value="about" class="flex-1 text-center">About me</Tabs.Trigger>
-		<Tabs.Trigger value="projects" class="flex-1 text-center">Projects</Tabs.Trigger>
-		<Tabs.Trigger value="spotify" class="flex-1 text-center">Spotify</Tabs.Trigger>
+		<Tabs.Trigger value="about" class="flex-1 text-center">About Me</Tabs.Trigger>
+		<Tabs.Trigger value="projects" class="flex-1 text-center">My Projects & Forks</Tabs.Trigger>
+		<Tabs.Trigger value="spotify" class="flex-1 text-center">My Spotify Stats</Tabs.Trigger>
 	</Tabs.List>
 	<Tabs.Content value="about">
-		<Card.Root class="h-full">
+		<Card.Root class="shadow-lg">
 			<Card.Content>
 				<h2 class="text-2xl font-bold xl:text-3xl">About me</h2>
 				<h1>WIP</h1>
@@ -40,15 +40,15 @@
 		</Card.Root>
 	</Tabs.Content>
 	<Tabs.Content value="projects">
-		<Card.Root class="h-full">
+		<Card.Root class="shadow-lg">
 			<Card.Content>
 				<Github />
 			</Card.Content>
 		</Card.Root>
 	</Tabs.Content>
 	<Tabs.Content value="spotify">
-		<Card.Root class="h-full">
-			<Card.Content>
+		<Card.Root class="shadow-lg">
+			<Card.Content class="">
 				WIP
 				<!-- <Spotify /> -->
 			</Card.Content>
