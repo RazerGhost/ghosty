@@ -8,6 +8,7 @@
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Separator } from '$lib/components/ui/separator';
+    import { Toaster } from "$lib/components/ui/sonner";
 	import {
 		IconBrandGithub,
 		IconBrandLinkedin,
@@ -36,11 +37,12 @@
 </script>
 
 <ModeWatcher />
+<Toaster />
 <div class="flex flex-col">
 	<div class="flex justify-end p-6 xl:absolute xl:right-0 xl:top-0">
 		<Themetoggle />
 	</div>
-	<div class="flex flex-col items-start justify-center gap-10 p-6 xl:h-screen xl:flex-row  xl:p-20">
+	<div class="flex flex-col items-start justify-center gap-10 p-6 xl:h-screen xl:flex-row  xl:p-28">
 		<div
 			class="flex w-full flex-col space-y-6 overflow-hidden rounded-lg border p-6 shadow-lg lg:w-1/3 xl:w-1/6"
 		>
@@ -135,7 +137,7 @@
 				<Button variant="ghost" size="icon" href="https://github.com/RazerGhost" target="_blank">
 					<IconBrandGithub size={26} />
 				</Button>
-				<Dialog.Root class="col-span-1">
+				<Dialog.Root>
 					<Dialog.Trigger class={buttonVariants({ variant: 'ghost', size: 'icon' })}>
 						<IconBrandDiscord size={26} />
 					</Dialog.Trigger>

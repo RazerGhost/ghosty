@@ -6,9 +6,6 @@
 		IconStar,
 		IconGitFork,
 		IconCode,
-		IconCalendar,
-		IconFile,
-		IconLink
 	} from '@tabler/icons-svelte';
 
 	let user: any = {};
@@ -33,7 +30,6 @@
 			if (userRes.ok && reposRes.ok) {
 				user = await userRes.json();
 				repos = await reposRes.json();
-				console.log(repos);
 			} else {
 				error = 'Failed to load data';
 			}

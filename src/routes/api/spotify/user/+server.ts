@@ -1,17 +1,17 @@
-import type { RequestHandler } from '@sveltejs/kit';
+import { getUserData } from '$lib/spotify.js';
 
-export const GET: RequestHandler = async () => {
-	try {
-		const token = false;
-
-		const response = await fetch('https://api.spotify.com/v1/me', {
-			headers: { Authorization: `Bearer ${token}` }
-		});
-
-		if (!response.ok) throw new Error('Failed to fetch user data');
-		const data = await response.json();
-		return new Response(JSON.stringify(data), { status: 200 });
-	} catch (error) {
-		return new Response(JSON.stringify({ error: 'User fetch failed' }), { status: 500 });
+export async function GET({ cookies }) {
+	const accessToken = cookies.get('access_token');
+	if (!accessToken) {
+		return new Response('No access token.', { status: 401 });
 	}
-};
+
+	const userData = await getUserData(accessToken);
+	if (userData.error) {
+		return new Response('Failed to fetch user data.', { status: 400 });
+	}
+
+	return new Response(JSON.stringify(userData), {
+		headers: { 'Content-Type': 'application/json' }
+	});
+}

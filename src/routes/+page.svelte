@@ -48,9 +48,8 @@
 	</Tabs.Content>
 	<Tabs.Content value="spotify">
 		<Card.Root class="shadow-lg">
-			<Card.Content class="">
-				WIP
-				<!-- <Spotify /> -->
+			<Card.Content>
+				<Spotify />
 			</Card.Content>
 		</Card.Root>
 	</Tabs.Content>
