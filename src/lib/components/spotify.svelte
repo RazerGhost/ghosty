@@ -2,6 +2,7 @@
 	import { toast } from 'svelte-sonner';
 	import * as Select from '$lib/components/ui/select';
 	import * as Card from '$lib/components/ui/card';
+	import * as Avatar from '$lib/components/ui/avatar/';
 	import { onMount } from 'svelte';
 
 	let selectedTerm: any = { value: 'longTerm', label: '1 Year' }; // Default term length
@@ -130,7 +131,9 @@
 	<a href="/auth/spotify/login" class="btn btn-primary">Log in with Spotify</a>
 {:else if isLoading}
 	<p>Loading...</p>
-{:else if user}
+{:else if error}
+	<p>{error}</p>
+{:else}
 	<div>
 		{#if user && user.external_urls?.spotify && user.followers?.total}
 			<a href={user.external_urls.spotify} target="_blank"
@@ -160,29 +163,68 @@
 			</Select.Root>
 		</div>
 
-		<div>
-			<h3>Top Tracks</h3>
-			<ul>
-				{#each topTracks[selectedTerm.value].items as track}
-					<li>
-						{track.name} by
-						{#each track.artists as artist}
-							{artist.name}{#if artist !== track.artists[track.artists.length - 1]}
-								,
-							{/if}
-						{/each}
-					</li>
-				{/each}
-			</ul>
+		<div class="space-y-8">
+			<!-- Top Tracks Section -->
+			<div>
+				<h3 class="mb-4 text-2xl font-bold">Top Tracks</h3>
+				<ul class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+					{#each topTracks[selectedTerm.value].items as track}
+						<li class="h-full">
+							<div
+								class="relative h-full overflow-hidden rounded-lg shadow-lg"
+								style="background-image: url('{track.album?.images?.[0]?.url ||
+									'/placeholder.jpg'}'); background-size: cover; background-position: center;"
+							>
+								<!-- Blurred Background Overlay -->
+								<div class="absolute inset-0 bg-black/50 backdrop-blur-md"></div>
 
-			<h3>Top Artists</h3>
-			<ul>
-				{#each topArtists[selectedTerm.value].items as artist}
-					<li>{artist.name}</li>
-				{/each}
-			</ul>
+								<!-- Content Overlay -->
+								<div class="relative z-10 flex h-full flex-col space-y-4 p-6 text-white">
+									<!-- Avatar -->
+									<div class="h-20 w-20 overflow-hidden rounded-full border-2 border-white">
+										<img
+											src={track.album?.images?.[0]?.url || '/placeholder.jpg'}
+											alt={track.name}
+											class="h-full w-full object-cover"
+										/>
+									</div>
+
+									<!-- Track Info -->
+									<div class="flex flex-col space-y-2">
+										<h4 class="text-lg font-semibold">{track.name}</h4>
+										<p class="text-sm">
+											by {#each track.artists as artist, i}
+												{' ' + artist.name }{#if i !== track.artists.length - 1},
+												{/if}
+											{/each}
+										</p>
+									</div>
+								</div>
+							</div>
+						</li>
+					{/each}
+				</ul>
+			</div>
+
+			<!-- Top Artists Section -->
+			<div>
+				<h3 class="mb-4 text-2xl font-bold">Top Artists</h3>
+				<ul class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-5">
+					{#each topArtists[selectedTerm.value].items as artist}
+						<li class="flex flex-col items-center space-y-2 text-center">
+							<Avatar.Root class="h-20 w-20 overflow-hidden rounded-full border border-gray-700">
+								<Avatar.Image
+									src={artist.images?.[0]?.url || '/placeholder.jpg'}
+									alt={artist.name}
+									class="h-full w-full object-cover"
+								/>
+								<Avatar.Fallback class="bg-gray-700 text-sm text-white">NA</Avatar.Fallback>
+							</Avatar.Root>
+							<p class="text-sm font-medium">{artist.name}</p>
+						</li>
+					{/each}
+				</ul>
+			</div>
 		</div>
 	</div>
-{:else if error}
-	<p>{error}</p>
 {/if}
