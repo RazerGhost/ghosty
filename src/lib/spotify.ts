@@ -53,8 +53,8 @@ export const getUserData = async (accessToken: string) => {
     return response.json();
 };
 
-export const getTopTracks = async (accessToken: string) => {
-    const response = await fetch(`${API_BASE}/me/top/tracks`, {
+export const getTopTracksLongTerm = async (accessToken: string) => {
+    const response = await fetch(`${API_BASE}/me/top/tracks?time_range=long_term`, {
         headers: {
             Authorization: `Bearer ${accessToken}`,
         },
@@ -62,8 +62,44 @@ export const getTopTracks = async (accessToken: string) => {
     return response.json();
 };
 
-export const getTopArtists = async (accessToken: string) => {
-    const response = await fetch(`${API_BASE}/me/top/artists`, {
+export const getTopTracksMediumTerm = async (accessToken: string) => {
+    const response = await fetch(`${API_BASE}/me/top/tracks?time_range=medium_term`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    return response.json();
+};
+
+export const getTopTracksShortTerm = async (accessToken: string) => {
+    const response = await fetch(`${API_BASE}/me/top/tracks?time_range=short_term`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    return response.json();
+};
+
+export const getTopArtistsLongTerm = async (accessToken: string) => {
+    const response = await fetch(`${API_BASE}/me/top/artists?time_range=long_term`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    return response.json();
+};
+
+export const getTopArtistsMediumTerm = async (accessToken: string) => {
+    const response = await fetch(`${API_BASE}/me/top/artists?time_range=medium_term`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    return response.json();
+};
+
+export const getTopArtistsShortTerm = async (accessToken: string) => {
+    const response = await fetch(`${API_BASE}/me/top/artists?time_range=short_term`, {
         headers: {
             Authorization: `Bearer ${accessToken}`,
         },

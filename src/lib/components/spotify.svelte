@@ -1,10 +1,20 @@
 <script lang="ts">
 	import { toast } from 'svelte-sonner';
+	import * as Select from '$lib/components/ui/select';
+	import * as Card from '$lib/components/ui/card';
 	import { onMount } from 'svelte';
 
+	let selectedTerm: any = { value: 'longTerm', label: '1 Year' }; // Default term length
+	let terms: any = [
+		{ value: 'longTerm', label: '1 Year' },
+		{ value: 'mediumTerm', label: '6 Months' },
+		{ value: 'shortTerm', label: '4 Weeks' }
+	];
+
 	let user: any = {};
-	let topTracks: any = {};
-	let topArtists: any = {};
+	let topTracks: any = { longTerm: [], mediumTerm: [], shortTerm: [] };
+	let topArtists: any = { longTerm: [], mediumTerm: [], shortTerm: [] };
+
 	let error: string = '';
 	let isLoading = true; // Track the loading state
 	let hasTokens = false; // Track whether tokens are available
@@ -79,10 +89,27 @@
 
 			if (userRes.ok && topTracksRes.ok && topArtistsRes.ok) {
 				user = await userRes.json();
-				topTracks = await topTracksRes.json();
-				topArtists = await topArtistsRes.json();
+				const tracksData = await topTracksRes.json();
+				const artistsData = await topArtistsRes.json();
+
+				// Assign structured data to state variables
+				topTracks = {
+					longTerm: tracksData.longTerm,
+					mediumTerm: tracksData.mediumTerm,
+					shortTerm: tracksData.shortTerm
+				};
+
+				console.log(topTracks);
+
+				topArtists = {
+					longTerm: artistsData.longTerm,
+					mediumTerm: artistsData.mediumTerm,
+					shortTerm: artistsData.shortTerm
+				};
+
+				console.log(topArtists);
 			} else {
-				error = 'Failed to load data from Spotify';
+				error = 'Failed to load data from Spotify.';
 			}
 		} catch (e) {
 			console.error('Error fetching data:', e);
@@ -103,7 +130,7 @@
 	<a href="/auth/spotify/login" class="btn btn-primary">Log in with Spotify</a>
 {:else if isLoading}
 	<p>Loading...</p>
-{:else if user && topTracks && topArtists}
+{:else if user}
 	<div>
 		{#if user && user.external_urls?.spotify && user.followers?.total}
 			<a href={user.external_urls.spotify} target="_blank"
@@ -112,27 +139,49 @@
 			<p><strong>Followers:</strong> {user.followers.total}</p>
 		{/if}
 
-		{#if topTracks && topTracks.items}
+		<!-- Term Selector -->
+		<div>
+			<Select.Root
+				portal={null}
+				selected={selectedTerm.value}
+				onSelectedChange={(v) => {
+					v && (selectedTerm.value = v.value) && (selectedTerm.label = v.label);
+				}}
+			>
+				<Select.Trigger class="w-[180px]">
+					<Select.Value placeholder={selectedTerm.label} />
+				</Select.Trigger>
+				<Select.Content>
+					{#each terms as term}
+						<Select.Item value={term.value} label={term.label}>{term.label}</Select.Item>
+					{/each}
+				</Select.Content>
+				<Select.Input name="selectedTerm" />
+			</Select.Root>
+		</div>
+
+		<div>
 			<h3>Top Tracks</h3>
 			<ul>
-				{#each topTracks.items as track}
+				{#each topTracks[selectedTerm.value].items as track}
 					<li>
-						{track.name} by {#each track.artists as artist}
-							{artist.name}
+						{track.name} by
+						{#each track.artists as artist}
+							{artist.name}{#if artist !== track.artists[track.artists.length - 1]}
+								,
+							{/if}
 						{/each}
 					</li>
 				{/each}
 			</ul>
-		{/if}
 
-		{#if topArtists && topArtists.items}
 			<h3>Top Artists</h3>
 			<ul>
-				{#each topArtists.items as artist}
+				{#each topArtists[selectedTerm.value].items as artist}
 					<li>{artist.name}</li>
 				{/each}
 			</ul>
-		{/if}
+		</div>
 	</div>
 {:else if error}
 	<p>{error}</p>
