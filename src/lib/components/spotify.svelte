@@ -221,7 +221,7 @@
 			<Carousel.Root
 				plugins={[
 					Autoplay({
-						delay: 2000
+						delay: 2250
 					})
 				]}
 				class="flex gap-4 overflow-x-scroll"
