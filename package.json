@@ -38,6 +38,7 @@
 	"type": "module",
 	"dependencies": {
 		"@tabler/icons-svelte": "^3.19.0",
-		"cookie": "^1.0.2"
+		"cookie": "^1.0.2",
+		"embla-carousel-autoplay": "^8.5.1"
 	}
 }

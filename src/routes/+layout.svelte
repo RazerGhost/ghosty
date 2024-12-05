@@ -8,7 +8,7 @@
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Separator } from '$lib/components/ui/separator';
-    import { Toaster } from "$lib/components/ui/sonner";
+	import { Toaster } from '$lib/components/ui/sonner';
 	import {
 		IconBrandGithub,
 		IconBrandLinkedin,
@@ -42,7 +42,9 @@
 	<div class="flex justify-end p-6 xl:absolute xl:right-0 xl:top-0">
 		<Themetoggle />
 	</div>
-	<div class="flex flex-col items-start justify-center gap-10 p-6 xl:h-screen xl:flex-row  xl:p-28">
+	<div
+		class="flex shrink-0 flex-col items-start justify-center gap-10 p-6 xl:h-screen xl:flex-row xl:p-28"
+	>
 		<div
 			class="flex w-full flex-col space-y-6 overflow-hidden rounded-lg border p-6 shadow-lg lg:w-1/3 xl:w-1/6"
 		>
