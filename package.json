@@ -37,6 +37,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@supabase/supabase-js": "^2.47.0",
 		"@tabler/icons-svelte": "^3.19.0",
 		"cookie": "^1.0.2",
 		"embla-carousel-autoplay": "^8.5.1"

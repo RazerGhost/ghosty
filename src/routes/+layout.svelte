@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import '../app.css';
 	import { ModeWatcher } from 'mode-watcher';
 	import Themetoggle from '$lib/components/themetoggle.svelte';
@@ -9,6 +9,7 @@
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Separator } from '$lib/components/ui/separator';
 	import { Toaster } from '$lib/components/ui/sonner';
+	import * as Tabs from '$lib/components/ui/tabs';
 	import {
 		IconBrandGithub,
 		IconBrandLinkedin,
@@ -26,6 +27,7 @@
 		IconBrandPhp,
 		IconBrandTypescript
 	} from '@tabler/icons-svelte';
+	import { goto } from '$app/navigation';
 
 	const birthday = new Date('2005-06-12');
 
@@ -33,6 +35,31 @@
 		const ageDifMs = Date.now() - birthday.getTime();
 		const ageDate = new Date(ageDifMs);
 		return Math.abs(ageDate.getUTCFullYear() - 1970);
+	}
+
+	let currentPage = 'about';
+
+	const pages: any = [
+		{
+			title: 'About Me',
+			value: 'about',
+			route: '/'
+		},
+		{
+			title: 'My Projects & Forks',
+			value: 'projects',
+			route: '/github'
+		},
+		{
+			title: 'My Spotify Stats',
+			value: 'spotify',
+			route: '/spotify'
+		}
+	];
+
+	function handleTabChange(value: string) {
+		currentPage = value;
+		goto(pages.find((page: any) => page.value === value).route);
 	}
 </script>
 
@@ -190,7 +217,20 @@
 		</div>
 
 		<div class=" w-full xl:w-5/6">
-			<slot />
+			<Tabs.Root value={currentPage} class="h-full">
+				<Tabs.List class="mb-4 flex justify-around">
+					{#each pages as page}
+						<Tabs.Trigger
+							on:click={() => handleTabChange(page.value)}
+							value={page.value}
+							class="flex-1 text-center">{page.title}</Tabs.Trigger
+						>
+					{/each}
+				</Tabs.List>
+				<Tabs.Content value={currentPage}>
+					<slot />
+				</Tabs.Content>
+			</Tabs.Root>
 		</div>
 	</div>
 </div>
