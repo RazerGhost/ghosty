@@ -7,12 +7,14 @@ import { Chip } from "@heroui/chip";
 import { Tooltip } from "@heroui/tooltip";
 import {
     Github, Mail, Atom, Rocket, Music, Braces, Code2, Database, FileCode2, PanelsTopLeft,
-    Linkedin, Disc as DiscordIcon, BarChart3, Headphones, Instagram,
+    Linkedin, BarChart3, Headphones, Instagram,
     Drama
 } from "lucide-react";
-import { LocalTimeTile } from "@/components/Tiles/LocalTimeTile";
-import { QuickLinksTile } from "@/components/Tiles/QuickLinksTile";
+import { DiscordLogoIcon } from "@radix-ui/react-icons"
+import { LocalTimeTile } from "@/components/Tiles/LocalTime";
+import { QuickLinksTile } from "@/components/Tiles/QuickLinks";
 import { ThemeSwitch } from "@/components/theme-switch";
+import { DiscordActivityTile } from "@/components/Tiles/DiscordActivity";
 
 export default function Home() {
     const card =
@@ -37,21 +39,7 @@ export default function Home() {
                 </Card>
 
                 {/* Discord (4) */}
-                <Card className={`col-span-12 md:col-span-4 ${card}`}>
-                    <CardHeader className={`${header} flex items-center justify-between`}>
-                        <div className="flex items-center gap-2">
-                            <DiscordIcon size={18} />
-                            <span className="text-sm font-medium">Discord Activity</span>
-                        </div>
-                        <Chip size="sm" variant="flat" color="success">Online</Chip>
-                    </CardHeader>
-                    <CardBody className={`${body} flex flex-col gap-3`}>
-                        <p className="text-sm"><span className="font-medium">Playing:</span> VS Code — “Shipping features”</p>
-                        <div className="h-16 md:h-20 rounded-xl bg-foreground/10 grid place-items-center text-xs text-foreground/60">
-                            Presence / timeline placeholder
-                        </div>
-                    </CardBody>
-                </Card>
+                <DiscordActivityTile />
 
                 {/* Projects (3) */}
                 <Card className={`col-span-12 md:col-span-3 ${card} relative overflow-hidden`}>
@@ -124,7 +112,7 @@ export default function Home() {
                     <SocialMini href="https://github.com/RazerGhost" label="GitHub"><Github size={18} /></SocialMini>
                     <SocialMini href="https://www.linkedin.com/in/dimitri-eleazar-de-jong/" label="LinkedIn"><Linkedin size={18} /></SocialMini>
                     <SocialMini href="mailto:info@rg-digital.xyz" label="Email"><Mail size={18} /></SocialMini>
-                    <SocialMini href="https://discord.com/users/425729668482859008" label="Discord"><DiscordIcon size={18} /></SocialMini>
+                    <SocialMini href="https://discord.com/users/425729668482859008" label="Discord"><DiscordLogoIcon /></SocialMini>
                     <SocialMini href="https://mydramalist.com/profile/RazerGhost" label="MyDramaList"><Drama size={18} /></SocialMini>
                     <SocialMini href="https://www.instagram.com/d1mitrl/" label="Instagram"><Instagram size={18} /></SocialMini>
                 </div>
