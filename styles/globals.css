@@ -2,6 +2,11 @@
 
 @config "../tailwind.config.js";
 
+/* Custom 16-column grid */
+.grid-cols-16 {
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
