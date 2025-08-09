@@ -2,12 +2,13 @@ import { DiscordLogoIcon } from "@radix-ui/react-icons"
 import { Chip } from "@heroui/chip"
 import { Card, CardBody, CardHeader } from "@heroui/card"
 import { Skeleton } from "@heroui/skeleton";
-import { activitiesOfType, type Status } from "@/types/lanyard";
-import { GetUserData } from "@/lib/lanyard"
-import { Avatar, AvatarGroup, AvatarIcon } from "@heroui/avatar";
+import { activitiesOfType } from "@/types/lanyard";
+import { GetUserData, ExtractLink } from "@/lib/lanyard"
+import { Avatar, } from "@heroui/avatar";
 
 
 export function DiscordActivityTile({ card = "", header = "", body = "" }: { card?: string, header?: string, body?: string }) {
+    let playingAsset = '';
     const { loading, status } = GetUserData()
     const Userstatus = status?.discord_status
     const statusMap = {
@@ -25,9 +26,10 @@ export function DiscordActivityTile({ card = "", header = "", body = "" }: { car
 
     const custom = activitiesOfType(status.activities, 4)[0];
     const playing = activitiesOfType(status.activities, 0)[0];
-    const playingAsset = extractLink(playing.assets?.large_image || "");
-    console.log("Extracted playing asset:", playingAsset);
-    console.log("DiscordActivityTile", { status, custom, playing });
+    if (playing) {
+        playingAsset = ExtractLink(playing.assets?.large_image || "", "github");
+        console.log("DiscordActivityTile", { status, custom, playing });
+    }
 
     return (
         <Card className={`col-span-12 md:col-span-4 ${card}`}>
@@ -48,9 +50,9 @@ export function DiscordActivityTile({ card = "", header = "", body = "" }: { car
                 {playing && (
                     <div className="flex items-center gap-3 p-2 rounded-lg bg-muted/40">
                         <Avatar
-                            className="w-10 h-10 border border-muted"
                             src={playingAsset || undefined}
                             fallback={playing.name?.[0] || "?"}
+                            isBordered radius="lg"
                         />
                         <div className="flex flex-col">
                             <span className="text-xs text-muted-foreground">Playing</span>
@@ -82,15 +84,4 @@ function TileSkeleton() {
             </CardBody>
         </Card>
     )
-}
-
-function extractLink(input: string) {
-    // Handles cases like mp:external/.../https/raw.githubusercontent.com/...
-    const urlRegex = /(?:https?:\/\/)?raw\.githubusercontent\.com\/[^\s"']+/;
-    const matches = input.match(urlRegex);
-    if (matches) {
-        // Always return a full https link
-        return matches[0].startsWith("http") ? matches[0] : `https://${matches[0]}`;
-    }
-    return null;
 }

@@ -3,18 +3,15 @@
 import Link from "next/link";
 import { Button } from "@heroui/button";
 import { Card, CardBody, CardHeader } from "@heroui/card";
-import { Chip } from "@heroui/chip";
-import { Tooltip } from "@heroui/tooltip";
-import {
-    Github, Mail, Atom, Rocket, Music, Braces, Code2, Database, FileCode2, PanelsTopLeft,
-    Linkedin, BarChart3, Headphones, Instagram,
-    Drama
-} from "lucide-react";
-import { DiscordLogoIcon } from "@radix-ui/react-icons"
+import { Rocket, Music, PanelsTopLeft, BarChart3, } from "lucide-react";
 import { LocalTimeTile } from "@/components/Tiles/LocalTime";
 import { QuickLinksTile } from "@/components/Tiles/QuickLinks";
-import { ThemeSwitch } from "@/components/theme-switch";
 import { DiscordActivityTile } from "@/components/Tiles/DiscordActivity";
+import { NowPlayingTile } from "@/components/Tiles/NowPlaying";
+import { TechStackTile } from "@/components/Tiles/TechStack";
+import { GithubStatsTile } from "@/components/Tiles/GithubStats";
+import { SocialsTile } from "@/components/Tiles/Socials";
+import { ThemeToggleTile } from "@/components/Tiles/ThemeToggle";
 
 export default function Home() {
     const card =
@@ -39,14 +36,10 @@ export default function Home() {
                 </Card>
 
                 {/* Discord (4) */}
-                <DiscordActivityTile />
+                <DiscordActivityTile card={card} header={header} body={body} />
 
                 {/* Projects (3) */}
                 <Card className={`col-span-12 md:col-span-3 ${card} relative overflow-hidden`}>
-                    {/* corner watermark */}
-                    <div className="pointer-events-none absolute -right-6 -top-6 opacity-10">
-                        <Rocket size={120} />
-                    </div>
 
                     <CardHeader className={header}>
                         <div className="flex items-center gap-2">
@@ -83,39 +76,13 @@ export default function Home() {
                     </CardBody>
                 </Card>
 
-                {/* Row 2 */}
-                {/* Spotify (4) */}
-                <Card className={`col-span-12 md:col-span-4  ${card}`}>
-                    <CardHeader className={`${header} flex items-center justify-between`}>
-                        <div className="flex items-center gap-2">
-                            <Headphones size={18} />
-                            <span className="text-sm font-medium">Now Playing</span>
-                        </div>
-                        <Chip size="sm" variant="flat">Spotify</Chip>
-                    </CardHeader>
-                    <CardBody className={`${body}`}>
-                        <div className="flex items-center gap-4">
-                            <div className="size-14 md:size-16 rounded-xl bg-foreground/10" aria-label="Album art" />
-                            <div className="min-w-0 w-full">
-                                <p className="truncate font-medium text-[clamp(13px,2vw,15px)]">Song Title — Artist</p>
-                                <p className="text-[11px] md:text-xs text-foreground/60 truncate">Album Name</p>
-                                <div className="mt-2 h-2 w-full rounded-full bg-foreground/10 overflow-hidden">
-                                    <div className="h-2 w-1/3 rounded-full bg-foreground/40" />
-                                </div>
-                            </div>
-                        </div>
-                    </CardBody>
-                </Card>
+                <div className="col-span-12 md:col-span-3 grid grid-cols-2 gap-2 md:gap-3 items-stretch [grid-auto-rows:minmax(0,1fr)] min-h-0">
+                    <NowPlayingTile card={`${card} h-full`} header={header} body={body} />
+                    <TechStackTile card={`${card} h-full`} header={header} body={body} />
+                </div>
 
                 {/* Socials grid (3 cols wide, no wrapper card) */}
-                <div className="col-span-10 md:col-span-3 grid grid-cols-4 md:grid-cols-3 gap-2 md:gap-3">
-                    <SocialMini href="https://github.com/RazerGhost" label="GitHub"><Github size={18} /></SocialMini>
-                    <SocialMini href="https://www.linkedin.com/in/dimitri-eleazar-de-jong/" label="LinkedIn"><Linkedin size={18} /></SocialMini>
-                    <SocialMini href="mailto:info@rg-digital.xyz" label="Email"><Mail size={18} /></SocialMini>
-                    <SocialMini href="https://discord.com/users/425729668482859008" label="Discord"><DiscordLogoIcon /></SocialMini>
-                    <SocialMini href="https://mydramalist.com/profile/RazerGhost" label="MyDramaList"><Drama size={18} /></SocialMini>
-                    <SocialMini href="https://www.instagram.com/d1mitrl/" label="Instagram"><Instagram size={18} /></SocialMini>
-                </div>
+                <SocialsTile />
 
                 {/* Music Stats (4) */}
                 <Card className={`col-span-12 md:col-span-3 ${card}`}>
@@ -164,53 +131,10 @@ export default function Home() {
 
 
                 {/* Theme (2) */}
-                <Card className={`col-span-6 md:col-span-2 ${card}`}>
-                    <CardBody className="h-full grid place-items-center">
-                        <ThemeSwitch />
-                    </CardBody>
-                </Card>
+                <ThemeToggleTile card={card} header={header} body={body} />
 
-                {/* Row 3 (3 + 4 + 3 + 2 = 12) */}
                 {/* GitHub (4) */}
-                <Card className={`col-span-12 md:col-span-4 ${card}`}>
-                    <CardHeader className={`${header} flex items-center justify-between`}>
-                        <div className="flex items-center gap-2">
-                            <Github size={18} />
-                            <span className="text-sm font-medium">GitHub</span>
-                        </div>
-                        <Chip size="sm" variant="flat">Stats</Chip>
-                    </CardHeader>
-                    <CardBody className={`${body} flex flex-col gap-4`}>
-                        <div className="flex flex-wrap gap-2">
-                            <Chip variant="flat">Repos: 24</Chip>
-                            <Chip variant="flat">Stars: 102</Chip>
-                            <Chip variant="flat">PRs: 58</Chip>
-                        </div>
-                        <div className="h-20 md:h-24 rounded-xl bg-foreground/10 grid place-items-center text-xs text-foreground/60">
-                            Contribution heatmap placeholder
-                        </div>
-                        <div className="mt-auto flex justify-end">
-                            <Link href="https://github.com/" target="_blank">
-                                <Button size="sm" variant="bordered" endContent={<PanelsTopLeft size={16} />}>View Profile</Button>
-                            </Link>
-                        </div>
-                    </CardBody>
-                </Card>
-
-                {/* Tech (3) */}
-                <Card className={`col-span-12 md:col-span-3 ${card}`}>
-                    <CardHeader className={header}><span className="text-sm font-medium">Tech Stack</span></CardHeader>
-                    <CardBody className={`${body}`}>
-                        <div className="grid grid-cols-3 gap-2 md:gap-3">
-                            <TechIcon icon={<Code2 />} label="TypeScript" />
-                            <TechIcon icon={<FileCode2 />} label="Next.js" />
-                            <TechIcon icon={<Database />} label="Turso" />
-                            <TechIcon icon={<Atom />} label="React" />
-                            <TechIcon icon={<Braces />} label="Tailwind" />
-                            <TechIcon icon={<Music />} label="Spotify API" />
-                        </div>
-                    </CardBody>
-                </Card>
+                <GithubStatsTile card={card} header={header} body={body} />
 
                 {/* Business (3) */}
                 <Card className={`col-span-12 md:col-span-3 ${card} overflow-hidden`}>
@@ -254,41 +178,8 @@ export default function Home() {
     );
 }
 
-/* Helpers */
-function TechIcon({ icon, label }: { icon: React.ReactNode; label: string }) {
-    return (
-        <div className="flex items-center gap-2 rounded-xl border border-foreground/10 p-2.5 md:p-3">
-            <span className="shrink-0">{icon}</span>
-            <span className="text-sm truncate">{label}</span>
-        </div>
-    );
-}
 
-function SocialMini({
-    href,
-    label,
-    children,
-}: {
-    href: string;
-    label: string;
-    children: React.ReactNode;
-}) {
-    return (
-        <Link
-            href={href}
-            aria-label={label}
-            title={label}
-            target={href.startsWith("http") ? "_blank" : undefined}
-            className="group rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
-        >
-            <Card className="rounded-2xl h-full border border-foreground/10 group-hover:border-foreground/20 group-hover:shadow-sm transition-all">
-                <CardBody className="aspect-square grid place-items-center">
-                    <div className="opacity-80 group-hover:opacity-100 text-sm">{children}</div>
-                </CardBody>
-            </Card>
-        </Link>
-    );
-}
+
 
 function Tag({ children, className = "" }: { children: React.ReactNode; className?: string }) {
     return (
