@@ -144,3 +144,16 @@ html {
 .btn-primary:hover::before {
   left: 100%;
 }
+
+@keyframes crash-slow {
+  0%   { transform: translate(-50%, -200%) rotate(-45deg); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translate(-50%, 200%)  rotate(20deg);  opacity: 0; }
+}
+@keyframes trace-long {
+  0%   { opacity: 0; transform: translateY(-200%); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(200%); }
+}
+.animate-crash-slow { animation: crash-slow 2.6s ease-in-out forwards; }
+.animate-trace-long { animation: trace-long 2.6s ease-in-out forwards; }

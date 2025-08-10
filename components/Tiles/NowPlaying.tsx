@@ -4,21 +4,14 @@ import { Card, CardBody, CardHeader } from "@heroui/card";
 import { Chip } from "@heroui/chip";
 import { Skeleton } from "@heroui/skeleton";
 import { Progress } from "@heroui/progress";
-import { Headphones } from "lucide-react";
+import { AudioLines, Disc3, Pause } from "lucide-react";
 import { activitiesOfType } from "@/types/lanyard";
-import { ExtractLink, GetUserData as _GetUserData } from "@/lib/lanyard";
+import { GetUserData as _GetUserData } from "@/lib/lanyard";
 import { useEffect, useState } from "react";
-import { Avatar } from "@heroui/avatar";
+import { msToClock } from "@/lib/helpers";
 
 // optional: alias to clarify it's a hook
 const useUserData = _GetUserData;
-
-function msToClock(ms: number) {
-    const s = Math.max(0, Math.floor(ms / 1000));
-    const m = Math.floor(s / 60);
-    const r = s % 60;
-    return `${m}:${r.toString().padStart(2, "0")}`;
-}
 
 export function NowPlayingTile({
     card = "",
@@ -70,21 +63,17 @@ export function NowPlayingTile({
     // early return AFTER hooks are declared
     if (loading || !status) return <TileSkeleton />;
 
-    const song = spotify?.song ?? listening?.details ?? "Unknown";
-    const artist = spotify?.artist ?? listening?.state ?? "";
-    const album = spotify?.album ?? "";
+    const song = spotify?.song ?? listening?.details ?? "Track not found";
+    const artist = spotify?.artist ?? listening?.state ?? "Artist not found";
+    const album = spotify?.album ?? "Album not found";
     const albumArt = spotify?.album_art_url;
 
     return (
         <Card className={`col-span-12 md:col-span-4 h-full flex flex-col ${card}`}>
-            <CardHeader className={`${header} flex items-center justify-between`}>
-                <div className="flex items-center gap-2">
-                    <Headphones size={18} />
-                    <span className="text-sm font-medium">Now Playing</span>
-                </div>
-                <Chip size="sm" variant="flat">Spotify</Chip>
-            </CardHeader>
-            <CardBody className={` ${body} overflow-hidden`}>
+            <div className="pointer-events-none absolute -right-6 -top-6 opacity-10">
+                <Disc3 size={80} />
+            </div>
+            <CardBody className={` ${body} justify-center overflow-hidden`}>
                 <div className="flex items-center gap-4">
                     {/* Album Art (25%) */}
                     <div
@@ -97,13 +86,19 @@ export function NowPlayingTile({
                                 alt={album || song}
                                 className="w-full h-full object-cover"
                             />
-                        ) : null}
+                        ) : (
+                            <div className="flex flex-col items-center justify-center h-full w-full text-foreground/40">
+                                <Disc3 size={32} className="mb-1" />
+                                <span className="text-xs">No song playing</span>
+                            </div>
+                        )}
                     </div>
 
                     {/* Details (75%) */}
                     <div className="basis-3/4 min-w-0">
                         <p className="truncate font-medium text-[clamp(13px,2vw,15px)]">
-                            {song}{artist ? <> — {artist}</> : null}
+                            {song ? <>{song}</> : null}
+                            {artist ? <> — {artist}</> : null}
                         </p>
                         {album ? (
                             <p className="text-[11px] md:text-xs text-foreground/60 truncate">{album}</p>
@@ -134,7 +129,7 @@ function TileSkeleton() {
         <Card className="col-span-12 md:col-span-4">
             <CardHeader className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <Headphones size={18} />
+                    <AudioLines size={18} />
                     <span className="text-sm font-medium">Now Playing</span>
                 </div>
                 <Chip size="sm" variant="flat">Loading...</Chip>

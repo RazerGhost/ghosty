@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "@heroui/button";
 import { Card, CardBody, CardHeader } from "@heroui/card";
+import { Chip } from "@heroui/chip";
 import { Rocket, Music, PanelsTopLeft, BarChart3, } from "lucide-react";
 import { LocalTimeTile } from "@/components/Tiles/LocalTime";
 import { QuickLinksTile } from "@/components/Tiles/QuickLinks";
@@ -12,6 +13,10 @@ import { TechStackTile } from "@/components/Tiles/TechStack";
 import { GithubStatsTile } from "@/components/Tiles/GithubStats";
 import { SocialsTile } from "@/components/Tiles/Socials";
 import { ThemeToggleTile } from "@/components/Tiles/ThemeToggle";
+import { ProjectsTile } from "@/components/Tiles/Projects";
+import { WeatherMini } from "@/components/Tiles/WeatherMini";
+import { AboutTile } from "@/components/Tiles/About";
+import { QuotesTile } from "@/components/Tiles/Quotes";
 
 export default function Home() {
     const card =
@@ -25,66 +30,24 @@ export default function Home() {
             <div className="grid grid-cols-12 grid-rows-[repeat(3,minmax(0,1fr))] grid-flow-dense gap-2 md:gap-3 h-full">
 
                 {/* Row 1 (3 + 4 + 2 + 3 = 12) */}
-                {/* About (3) */}
-                <Card className={`col-span-12 md:col-span-3 ${card}`}>
-                    <CardBody className="h-full flex flex-col justify-center">
-                        <div className="space-y-1">
-                            <h2 className="font-semibold text-[clamp(18px,2.2vw,22px)]">Dimitri de Jong</h2>
-                            <p className="text-[clamp(12px,1.6vw,14px)] text-foreground/70">Web developer</p>
-                        </div>
-                    </CardBody>
-                </Card>
+                {/* About (1) */}
+                <AboutTile card={card} />
 
-                {/* Discord (4) */}
+                {/* Discord (2) */}
                 <DiscordActivityTile card={card} header={header} body={body} />
 
                 {/* Projects (3) */}
-                <Card className={`col-span-12 md:col-span-3 ${card} relative overflow-hidden`}>
-
-                    <CardHeader className={header}>
-                        <div className="flex items-center gap-2">
-                            <Rocket size={18} />
-                            <h3 className="text-sm font-medium">Projects</h3>
-                        </div>
-                    </CardHeader>
-
-                    <CardBody className={`${body} flex flex-col gap-3`}>
-                        {/* swap these for real data later */}
-                        <Link href="https://proluma.nl/" className="group flex items-center justify-between rounded-xl border border-foreground/10 px-3 py-2 hover:border-foreground/20 transition">
-                            <div className="min-w-0">
-                                <p className="truncate text-sm font-medium">Proluma</p>
-                                <div className="mt-1 flex gap-1"><Tag>Wordpress</Tag><Tag>React</Tag><Tag>API's</Tag></div>
-                            </div>
-                            <PanelsTopLeft className="shrink-0 opacity-60 group-hover:opacity-100" size={16} />
-                        </Link>
-
-                        <Link href="https://github.com/RazerGhost/Shiftsail" className="group flex items-center justify-between rounded-xl border border-foreground/10 px-3 py-2 hover:border-foreground/20 transition">
-                            <div className="min-w-0">
-                                <p className="truncate text-sm font-medium">Shiftsail</p>
-                                <div className="mt-1 flex gap-1"><Tag>Laravel</Tag><Tag>PHP</Tag></div>
-                            </div>
-                            <PanelsTopLeft className="shrink-0 opacity-60 group-hover:opacity-100" size={16} />
-                        </Link>
-
-                        <div className="mt-auto pt-2">
-                            <Link href="/projects">
-                                <Button fullWidth variant="solid" color="primary" endContent={<PanelsTopLeft size={16} />}>
-                                    View github projects
-                                </Button>
-                            </Link>
-                        </div>
-                    </CardBody>
-                </Card>
+                <ProjectsTile card={card} header={header} body={body} />
 
                 <div className="col-span-12 md:col-span-3 grid grid-cols-2 gap-2 md:gap-3 items-stretch [grid-auto-rows:minmax(0,1fr)] min-h-0">
                     <NowPlayingTile card={`${card} h-full`} header={header} body={body} />
                     <TechStackTile card={`${card} h-full`} header={header} body={body} />
                 </div>
 
-                {/* Socials grid (3 cols wide, no wrapper card) */}
+                {/* Socials (5) */}
                 <SocialsTile />
 
-                {/* Music Stats (4) */}
+                {/* Music Stats (6) */}
                 <Card className={`col-span-12 md:col-span-3 ${card}`}>
                     <CardHeader className={`${header} flex items-center justify-between`}>
                         <div className="flex items-center gap-2">
@@ -93,9 +56,9 @@ export default function Home() {
                         </div>
                         {/* fake period selector for now */}
                         <div className="hidden md:flex gap-1">
-                            <Tag className="cursor-default">Week</Tag>
-                            <Tag className="opacity-60">Month</Tag>
-                            <Tag className="opacity-60">Year</Tag>
+                            <Chip variant="faded" radius="sm">Week</Chip>
+                            <Chip variant="faded" radius="sm">Month</Chip>
+                            <Chip variant="faded" radius="sm">Year</Chip>
                         </div>
                     </CardHeader>
 
@@ -113,10 +76,10 @@ export default function Home() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-3 gap-2 mt-1">
-                            <Tag>House</Tag>
-                            <Tag>Synthwave</Tag>
-                            <Tag>Lo-fi</Tag>
+                        <div className="flex flex-row gap-3">
+                            <Chip variant="faded" radius="sm">House</Chip>
+                            <Chip variant="faded" radius="sm">Synthwave</Chip>
+                            <Chip variant="faded" radius="sm">Lo-fi</Chip>
                         </div>
 
                         <div className="mt-auto pt-2">
@@ -130,13 +93,13 @@ export default function Home() {
                 </Card>
 
 
-                {/* Theme (2) */}
+                {/* Theme (7) */}
                 <ThemeToggleTile card={card} header={header} body={body} />
 
-                {/* GitHub (4) */}
+                {/* GitHub (8) */}
                 <GithubStatsTile card={card} header={header} body={body} />
 
-                {/* Business (3) */}
+                {/* Business (9) */}
                 <Card className={`col-span-12 md:col-span-3 ${card} overflow-hidden`}>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
                     <CardHeader className={header}>
@@ -152,10 +115,10 @@ export default function Home() {
                         </p>
 
                         <div className="flex flex-wrap gap-1.5">
-                            <Tag>Wordpress</Tag>
-                            <Tag>Laravel</Tag>
-                            <Tag>React</Tag>
-                            <Tag>API's</Tag>
+                            <Chip variant="flat" radius="sm" color="primary">Wordpress</Chip>
+                            <Chip variant="flat" radius="sm" color="primary">Laravel</Chip>
+                            <Chip variant="flat" radius="sm" color="primary">React</Chip>
+                            <Chip variant="flat" radius="sm" color="primary">API's</Chip>
                         </div>
 
                         <div className="mt-auto grid grid-cols-2 gap-2 pt-2">
@@ -169,10 +132,16 @@ export default function Home() {
                     </CardBody>
                 </Card>
 
-
+                {/* Quick Links (10) */}
                 <QuickLinksTile className="col-span-12 md:col-span-2" />
 
+                {/* Weather (4) */}
+                <WeatherMini className={card} />
+
+                {/* Local Time (11) */}
                 <LocalTimeTile className="col-span-12 md:col-span-2" />
+
+                <QuotesTile className="col-span-12 md:col-span-2" />
             </div>
         </main>
     );
