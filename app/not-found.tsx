@@ -16,7 +16,13 @@ export default function NotFound() {
         timerRef.current = setTimeout(() => setActive(false), 2600); // match animation
     };
 
-    useEffect(() => () => timerRef.current && clearTimeout(timerRef.current), []);
+    useEffect(() => {
+        return () => {
+            if (timerRef.current) {
+                clearTimeout(timerRef.current);
+            }
+        };
+    }, []);
 
     return (
         <div className="relative flex h-dvh flex-col items-center justify-center overflow-hidden bg-background px-6 text-center">
