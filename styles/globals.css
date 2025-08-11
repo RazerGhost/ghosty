@@ -157,3 +157,15 @@ html {
 }
 .animate-crash-slow { animation: crash-slow 2.6s ease-in-out forwards; }
 .animate-trace-long { animation: trace-long 2.6s ease-in-out forwards; }
+
+
+@keyframes marquee-x {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee-x 12s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee { animation: none; }
+  }

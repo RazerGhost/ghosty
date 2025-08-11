@@ -9,14 +9,16 @@ export function GithubStatsTile({
     card = "",
     header = "",
     body = "",
+    size = "",
 }: {
     card?: string;
     header?: string;
     body?: string;
+    size?: string;
 }) {
 
     return (
-        <Card className={`col-span-12 md:col-span-4 ${card}`}>
+        <Card className={`${size} ${card}`}>
             <CardHeader className={`${header} flex items-center justify-between`}>
                 <div className="flex items-center gap-2">
                     <Github size={18} />

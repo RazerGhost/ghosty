@@ -22,7 +22,8 @@ export function DiscordActivityTile({
     card = "",
     header = "",
     body = "",
-}: { card?: string; header?: string; body?: string }) {
+    size = "",
+}: { card?: string; header?: string; body?: string; size?: string }) {
     const { loading, status } = GetUserData();
 
     // derive safely even while loading
@@ -34,7 +35,7 @@ export function DiscordActivityTile({
     const custom = activitiesOfType(activities, 4)[0];
     const playing = activitiesOfType(activities, 0); // array
 
-    if (loading || !status) return <TileSkeleton />;
+    if (loading || !status) return <TileSkeleton card={card} body={body} header={header} size={size} />;
 
     const wash =
         statusColor === "success"
@@ -46,7 +47,7 @@ export function DiscordActivityTile({
                     : "from-foreground/5";
 
     return (
-        <Card className={`col-span-12 md:col-span-4 ${card} relative overflow-hidden`}>
+        <Card className={`${size} ${card} relative overflow-hidden`}>
             <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${wash} to-transparent`} />
 
             <CardHeader className={`${header} flex items-center justify-between relative z-10`}>
@@ -81,7 +82,6 @@ export function DiscordActivityTile({
     );
 }
 
-/* Child component: all hooks live here (not inside a loop) */
 function PlayingRow({
     act,
 }: {
@@ -101,14 +101,17 @@ function PlayingRow({
 
     const start = act.timestamps?.start ?? null;
     const end = act.timestamps?.end ?? null;
-    const [now, setNow] = React.useState(() => Date.now());
 
+    // clock tick
+    const [now, setNow] = React.useState(() => Date.now());
     React.useEffect(() => {
-        if (!start || !end) return;
+        if (!start) return; // tick if we have a start (end optional)
         const id = setInterval(() => setNow(Date.now()), 1000);
         return () => clearInterval(id);
-    }, [start, end]);
+    }, [start]);
 
+    // elapsed + (optional) progress
+    const elapsed = start ? Math.max(0, now - start) : 0;
     const total = start && end ? end - start : 0;
     const pos = start && end ? Math.min(now, end) - start : 0;
     const pct = total > 0 ? Math.max(0, Math.min(100, (pos / total) * 100)) : 0;
@@ -121,7 +124,8 @@ function PlayingRow({
                 ) : (
                     <Avatar
                         name={act.name || "?"}
-                        isBordered radius="lg"
+                        isBordered
+                        radius="lg"
                         classNames={{ base: "w-full h-full rounded-lg", name: "text-xs" }}
                     />
                 )}
@@ -136,7 +140,16 @@ function PlayingRow({
                     <div className="text-xs text-foreground/60 truncate">{act.state}</div>
                 ) : null}
 
-                {total > 0 && (
+                {/* If we only have a start: show a live timer. If we also have end: show progress bar. */}
+                {start && !end ? (
+                    <div className="mt-2 flex items-center gap-2 text-[10px] text-foreground/60">
+                        <span
+                            className="inline-block h-1.5 w-1.5 rounded-full bg-foreground/60 animate-pulse"
+                            aria-hidden
+                        />
+                        <span>{msToClock(elapsed)}</span>
+                    </div>
+                ) : total > 0 ? (
                     <div className="mt-2">
                         <div className="h-2 w-full rounded-full bg-foreground/10 overflow-hidden">
                             <div className="h-full rounded-full bg-foreground/40" style={{ width: `${pct}%` }} />
@@ -146,22 +159,27 @@ function PlayingRow({
                             <span>{msToClock(total)}</span>
                         </div>
                     </div>
-                )}
+                ) : null}
             </div>
         </div>
     );
 }
 
-function TileSkeleton() {
+function TileSkeleton({
+    card = "",
+    header = "",
+    body = "",
+    size = "",
+}: { card?: string; header?: string; body?: string; size?: string }) {
     return (
-        <Card className="col-span-12 md:col-span-4">
-            <CardHeader className="flex items-center justify-between">
+        <Card className={`${size} ${card}`}>
+            <CardHeader className={`flex items-center justify-between ${header}`}>
                 <div className="flex items-center gap-2">
                     <DiscordLogoIcon />
                     <span className="text-sm font-medium">Discord Activity</span>
                 </div>
             </CardHeader>
-            <CardBody className="flex flex-col gap-3">
+            <CardBody className={`flex flex-col gap-3 ${body}`}>
                 <Skeleton className="h-4 w-1/2 rounded" />
                 <div className="flex items-center gap-3">
                     <Skeleton className="h-12 w-12 rounded-lg" />

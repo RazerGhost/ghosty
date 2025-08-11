@@ -3,11 +3,11 @@ import Link from "next/link";
 import { Card, CardBody } from "@heroui/card";
 import { DiscordLogoIcon } from "@radix-ui/react-icons"
 
-export function SocialsTile() {
+export function SocialsTile({size = ""}: { size?: string }) {
 
     return (
         <>
-            <div className="col-span-10 md:col-span-3 grid grid-cols-4 md:grid-cols-3 gap-2 md:gap-3">
+            <div className={`${size}`}>
                 <SocialMini href="https://github.com/RazerGhost" label="GitHub"><Github size={24} /></SocialMini>
                 <SocialMini href="https://www.linkedin.com/in/dimitri-eleazar-de-jong/" label="LinkedIn"><Linkedin size={24} /></SocialMini>
                 <SocialMini href="mailto:info@rg-digital.xyz" label="Email"><Mail size={24} /></SocialMini>

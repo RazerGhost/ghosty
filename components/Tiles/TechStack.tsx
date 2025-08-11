@@ -29,12 +29,14 @@ export function TechStackTile({
     card = "",
     header = "",
     body = "",
+    size = "",
     autoplay = true,
 }: {
     items?: StackItem[];
     card?: string;
     header?: string;
     body?: string;
+    size?: string;
     autoplay?: boolean;
 }) {
     const autoplayRef = React.useRef(Autoplay({ delay: 2800, stopOnInteraction: true }));
@@ -43,24 +45,12 @@ export function TechStackTile({
         autoplay ? [autoplayRef.current] : []
     );
 
-    const [selected, setSelected] = React.useState(0);
-    const [snapCount, setSnapCount] = React.useState(0);
-
-    React.useEffect(() => {
-        if (!embla) return;
-        const onSelect = () => setSelected(embla.selectedScrollSnap());
-        const onInit = () => setSnapCount(embla.scrollSnapList().length);
-        embla.on("select", onSelect);
-        embla.on("reInit", () => { onInit(); onSelect(); });
-        onInit(); onSelect();
-    }, [embla]);
-
     // Pause/resume autoplay on hover to avoid “running away”
     const stop = () => autoplay && autoplayRef.current && autoplayRef.current.stop();
     const play = () => autoplay && autoplayRef.current && autoplayRef.current.play();
 
     return (
-        <Card className={`col-span-12 md:col-span-4 h-full flex flex-col ${card}`}>
+        <Card className={`${size} h-full flex flex-col ${card}`}>
             <CardHeader className={`${header} flex items-center justify-between`}>
                 <span className="text-sm font-medium">Tech Stack I use</span>
             </CardHeader>
@@ -80,7 +70,7 @@ export function TechStackTile({
                         {items.map((it, i) => (
                             <div
                                 key={`${it.label}-${i}`}
-                                className="px-3 shrink-0 basis-1/2 md:basis-1/4 lg:basis-1/5"
+                                className="px-3 shrink-0 basis-1/8 md:basis-1/6 lg:basis-1/6"
                                 role="group"
                                 aria-label={`${it.label} (${i + 1} of ${items.length})`}
                             >
@@ -122,15 +112,3 @@ function TechSlide({
         </Tooltip>
     );
 }
-
-
-/* Nav
-    <div className="hidden md:flex gap-1">
-        <Button isIconOnly size="sm" variant="flat" aria-label="Previous" onPress={() => embla?.scrollPrev()}>
-            <ChevronLeft size={16} />
-        </Button>
-        <Button isIconOnly size="sm" variant="flat" aria-label="Next" onPress={() => embla?.scrollNext()}>
-            <ChevronRight size={16} />
-        </Button>
-    </div>
-*/
