@@ -93,7 +93,7 @@ export function NowPlayingTile({
 
     const titleText = `${artist} — ${song}`;
 
-    if (loading || !status) return <TileSkeleton />;
+    if (loading || !status) return <TileSkeleton card={card} header={header} body={body} size={size} />;
 
     return (
         <Card className={`${size} h-full flex flex-col relative overflow-hidden ${card}`} >
@@ -220,16 +220,54 @@ function TileSkeleton({
     size?: string;
 }) {
     return (
-        <Card className={`${size} ${card}`}>
-            <CardBody className={`flex items-center gap-4 ${body}`}>
-                <div className="basis-1/4">
-                    <Skeleton className="aspect-square rounded-xl" />
+        <Card className={`${size} h-full flex flex-col relative overflow-hidden ${card}`}>
+            {/* Blurred background layer (skeleton) */}
+            <div
+            className="absolute inset-0 bg-background/60 overflow-hidden rounded-2xl"
+            aria-hidden
+            >
+            <div className="absolute inset-0 bg-center bg-cover scale-110 blur-2xl transition-all duration-500 bg-foreground/10" />
+            <div className="absolute inset-0 bg-background/60" />
+            </div>
+
+            <CardBody className={`${body} justify-center`}>
+            <div className="flex items-center gap-4">
+                {/* 25% COVER with circular progress ring (skeleton) */}
+                <div className="basis-1/4 min-w-0">
+                <div className="relative aspect-square rounded-xl overflow-hidden bg-foreground/10">
+                    <div
+                    className="absolute inset-0 rounded-xl"
+                    style={{
+                        background: `conic-gradient(hsl(var(--muted-foreground)) 30%, transparent 0)`,
+                        mask:
+                        "radial-gradient(circle at center, transparent 58%, black 60%), linear-gradient(black,black)",
+                        WebkitMaskComposite: "xor",
+                        maskComposite: "exclude" as any,
+                    }}
+                    aria-hidden
+                    />
+                    <Skeleton className="w-full h-full absolute inset-0 object-cover" />
                 </div>
-                <div className="basis-3/4 flex-1 space-y-2">
-                    <Skeleton className="h-4 w-2/3" />
-                    <Skeleton className="h-3 w-1/2" />
-                    <Skeleton className="h-2 w-full" />
                 </div>
+
+                {/* 75% DETAILS (skeleton) */}
+                <div className="basis-3/4 min-w-0">
+                <div className="min-w-0 flex-1 overflow-hidden">
+                    <Skeleton className="h-4 w-3/4 mb-1" />
+                </div>
+                <Skeleton className="h-3 w-1/2 mb-2" />
+                <div className="mt-2">
+                    <Skeleton className="h-2 w-full rounded-full bg-foreground/10" />
+                    <div className="mt-1 flex justify-between text-[10px] text-foreground/60">
+                    <Skeleton className="h-2 w-8" />
+                    <Skeleton className="h-2 w-8" />
+                    </div>
+                </div>
+                <div className="mt-2 flex items-center gap-2">
+                    <Skeleton className="h-4 w-12" />
+                </div>
+                </div>
+            </div>
             </CardBody>
         </Card>
     );
