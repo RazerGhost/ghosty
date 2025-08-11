@@ -13,7 +13,14 @@ export function GhostyTile({
     card = "",
 }: Props) {
     const ghosts = ["👻", "💀", "☠️", "🫥", "🕸️", "🪦", "🧟‍♂️", "🧟‍♀️", "🦴"];
-    const [emoji] = React.useState(() => ghosts[Math.floor(Math.random() * ghosts.length)]);
+    const [emoji, setEmoji] = React.useState<string | null>(null);
+
+    React.useEffect(() => {
+        const timer = setTimeout(() => {
+            setEmoji(ghosts[Math.floor(Math.random() * ghosts.length)]);
+        }, 500); // 500ms delay, adjust as needed
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <Card
