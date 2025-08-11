@@ -22,14 +22,14 @@ export function QuickLinksTile({
 }) {
     return (
         <Card className={`${size} rounded-2xl h-full border border-foreground/10 ${card}`}>
-            <CardBody className={`grid grid-cols-4 grid-rows-1 gap-2 ${body}`}>
+            <CardBody className={`grid grid-cols-2 sm:grid-cols-4 gap-2 ${body}`}>
                 {links.map((l) => (
                     <Link
                         key={l.label}
                         href={l.href}
                         target={l.ext ? "_blank" : undefined}
-                        className=" rounded-xl border border-foreground/10 grid place-items-center text-xs
-                       hover:border-foreground/20 hover:shadow-sm transition-colors"
+                        className="rounded-xl border border-foreground/10 grid place-items-center text-xs
+                       hover:border-foreground/20 hover:shadow-sm transition-colors px-2 py-2 text-center"
                     >
                         {l.label}
                     </Link>

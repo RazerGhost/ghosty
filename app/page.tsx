@@ -65,12 +65,12 @@ export default function Home() {
                 <DiscordActivityTile card={card} header={header} body={body} size="col-span-12 md:col-span-4" />
 
                 {/* Socials (5) */}
-                <SocialsTile size="col-span-12 md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-3" />
+                <SocialsTile size="col-span-12 md:col-span-3 grid grid-cols-4 md:grid-cols-3 gap-3" />
 
                 {/* Weather (4) */}
                 <WeatherMini card={card} header={header} body={body} size="col-span-12 md:col-span-3" />
 
-                <GhostyTile card={card} size="col-span-12 md:col-span-2" />
+                <GhostyTile card={card} size="hidden md:col-span-2 md:block" />
 
                 {/* GitHub (8) */}
                 <GithubStatsTile card={card} header={header} body={body} size="col-span-12 md:col-span-3" />

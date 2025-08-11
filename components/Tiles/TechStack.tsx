@@ -70,7 +70,7 @@ export function TechStackTile({
                         {items.map((it, i) => (
                             <div
                                 key={`${it.label}-${i}`}
-                                className="px-3 shrink-0 basis-1/2 md:basis-1/6 lg:basis-1/6"
+                                className="px-3 shrink-0 basis-1/8 md:basis-1/6 lg:basis-1/6"
                                 role="group"
                                 aria-label={`${it.label} (${i + 1} of ${items.length})`}
                             >
