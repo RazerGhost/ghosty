@@ -13,6 +13,7 @@ import { VerseOfTheDayTile } from "@/components/Tiles/VerseOfTheDay";
 import { MusicStatsTile } from "@/components/Tiles/MusicStats";
 import { BusinessCardTile } from "@/components/Tiles/BusinessCard";
 import { TimeThemeTile } from "@/components/Tiles/TimeTheme";
+import { GhostyTile } from "@/components/Tiles/Ghosty";
 
 export default function Home() {
     const card =
@@ -47,6 +48,8 @@ export default function Home() {
 
                 {/* Weather (4) */}
                 <WeatherMini card={card} header={header} body={body} size="col-span-12 md:col-span-3" />
+
+                <GhostyTile card={card} size="col-span-12 md:col-span-2" />
 
                 {/* GitHub (8) */}
                 <GithubStatsTile card={card} header={header} body={body} size="col-span-12 md:col-span-3" />
