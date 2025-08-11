@@ -59,8 +59,8 @@ export default function ProjectsPage() {
                     {/* Featured Project - Large */}
                     <Card shadow="lg" className="col-span-12 lg:col-span-8 row-span-3 p-6 bg-gradient-to-br from-blue-500 to-purple-600 text-white relative overflow-hidden">
                         <div className="absolute inset-0 opacity-20">
-                            <div className="absolute top-6 right-6 w-24 h-24 bg-white/20 rounded-full blur-xl animate-float"></div>
-                            <div className="absolute bottom-6 left-6 w-16 h-16 bg-white/15 rounded-full blur-lg animate-float-delayed"></div>
+                            <div className="absolute top-6 right-6 w-24 h-24 bg-white/20 rounded-full blur-xl "></div>
+                            <div className="absolute bottom-6 left-6 w-16 h-16 bg-white/15 rounded-full blur-lg"></div>
                         </div>
 
                         <div className="relative z-10">
@@ -140,11 +140,10 @@ export default function ProjectsPage() {
                             <div className="grid lg:grid-cols-3 gap-4">
                                 {projects.map((project, index) => (
                                     <Card key={index} shadow="sm" className="hover:scale-105 transition-all duration-300">
-                                        <div className={`h-20 bg-gradient-to-r relative overflow-hidden ${
-                                            index === 0 ? 'from-blue-500 to-purple-600' :
-                                            index === 1 ? 'from-green-500 to-teal-600' :
-                                            'from-orange-500 to-red-600'
-                                        }`}>
+                                        <div className={`h-20 bg-gradient-to-r relative overflow-hidden ${index === 0 ? 'from-blue-500 to-purple-600' :
+                                                index === 1 ? 'from-green-500 to-teal-600' :
+                                                    'from-orange-500 to-red-600'
+                                            }`}>
                                             <div className="absolute top-2 right-2">
                                                 <Chip size="sm" variant="solid" color="success">
                                                     {project.status}

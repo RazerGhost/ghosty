@@ -15,7 +15,7 @@ function dayOfYearInTZ(d = new Date(), timeZone = TZ) {
 
   const y = Number(parts.year);
   const m = Number(parts.month);
-  const day = Number(parts.day) + 1;
+  const day = Number(parts.day);
 
   const local = new Date(y, m - 1, day);
   const start = new Date(y, 0, 1);
