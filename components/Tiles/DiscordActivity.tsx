@@ -34,9 +34,8 @@ export function DiscordActivityTile({
     const activities = status?.activities ?? [];
     const custom = activitiesOfType(activities, 4)[0];
     const playing = activitiesOfType(activities, 0); // array
-    console.log(playing);
 
-    if (loading || !status) return <TileSkeleton />;
+    if (loading || !status) return <TileSkeleton card={card} body={body} header={header} size={size} />;
 
     const wash =
         statusColor === "success"
@@ -83,7 +82,6 @@ export function DiscordActivityTile({
     );
 }
 
-/* Child component: all hooks live here (not inside a loop) */
 function PlayingRow({
     act,
 }: {
@@ -100,7 +98,6 @@ function PlayingRow({
         const id = act.assets?.large_image;
         return id ? ExtractLink(id, "github") || null : null;
     }, [act.assets?.large_image]);
-    console.log(act)
 
     const start = act.timestamps?.start ?? null;
     const end = act.timestamps?.end ?? null;
@@ -168,16 +165,21 @@ function PlayingRow({
     );
 }
 
-function TileSkeleton() {
+function TileSkeleton({
+    card = "",
+    header = "",
+    body = "",
+    size = "",
+}: { card?: string; header?: string; body?: string; size?: string }) {
     return (
-        <Card className="col-span-12 md:col-span-4">
-            <CardHeader className="flex items-center justify-between">
+        <Card className={`${size} ${card}`}>
+            <CardHeader className={`flex items-center justify-between ${header}`}>
                 <div className="flex items-center gap-2">
                     <DiscordLogoIcon />
                     <span className="text-sm font-medium">Discord Activity</span>
                 </div>
             </CardHeader>
-            <CardBody className="flex flex-col gap-3">
+            <CardBody className={`flex flex-col gap-3 ${body}`}>
                 <Skeleton className="h-4 w-1/2 rounded" />
                 <div className="flex items-center gap-3">
                     <Skeleton className="h-12 w-12 rounded-lg" />

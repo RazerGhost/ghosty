@@ -4,23 +4,58 @@ import { Button } from "@heroui/button";
 import { Chip } from "@heroui/chip";
 import { MapPin, Briefcase, FileText, Mail } from "lucide-react";
 
-export function AboutTile({ card = "", header = "", body = "", size = "" }: { card?: string; header?: string; body?: string; size?: string }) {
+export function AboutTile({
+    card = "",
+    header = "",
+    body = "",
+    size = "",
+}: {
+    card?: string;
+    header?: string;
+    body?: string;
+    size?: string;
+}) {
     return (
-        <Card
-            className={`${size} relative overflow-hidden ${card} group`}
-        >
-            {/* soft primary wash on hover */}
+        <Card className={`${size} relative overflow-hidden ${card} group`}>
+            {/* Hover wash (yours) */}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+
+            {/* Subtle radial glow */}
+            <div
+                aria-hidden
+                className="
+          pointer-events-none absolute -inset-10
+          bg-[radial-gradient(120%_80%_at_0%_0%,hsl(var(--primary)/0.18)_0%,transparent_60%)]
+          blur-2xl
+        "
+            />
+
+            {/* Ultra-faint grid */}
+            <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-[0.03]"
+                style={{
+                    backgroundImage:
+                        "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
+                    backgroundSize: "22px 22px",
+                    color: "hsl(var(--foreground))",
+                    maskImage:
+                        "radial-gradient(circle at 20% 15%, black 55%, transparent 80%)", // fade it out towards edges
+                    WebkitMaskImage:
+                        "radial-gradient(circle at 20% 15%, black 55%, transparent 80%)",
+                }}
+            />
 
             <CardBody className={`h-full flex flex-col justify-center gap-3 relative z-10 ${body}`}>
                 {/* Heading */}
                 <div>
-                    <h1 className="text-[clamp(20px,2.4vw,24px)] font-semibold leading-tight">
+                    <h1 className="text-[clamp(20px,2.4vw,24px)] font-semibold leading-tight tracking-tight">
                         Dimitri de Jong
                     </h1>
-                    <p className="text-[clamp(12px,1.6vw,14px)] text-foreground/70">
-                        Web Developer
-                    </p>
+                    <p className="text-[clamp(12px,1.6vw,14px)] text-foreground/70">Web Developer</p>
+
+                    {/* tiny accent underline */}
+                    <span className="mt-2 block h-[2px] w-12 rounded-full bg-gradient-to-r from-primary/70 to-primary/20" />
                 </div>
 
                 {/* Meta chips */}
@@ -35,7 +70,7 @@ export function AboutTile({ card = "", header = "", body = "", size = "" }: { ca
 
                 {/* Tagline */}
                 <p className="text-xs text-foreground/60 line-clamp-2">
-                    Doing whatever i like at the moment
+                    Doing whatever I like at the moment
                 </p>
 
                 {/* CTAs */}

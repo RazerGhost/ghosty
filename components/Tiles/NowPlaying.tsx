@@ -1,10 +1,9 @@
 "use client";
 
 import { Card, CardBody } from "@heroui/card";
-import { Chip } from "@heroui/chip";
 import { Skeleton } from "@heroui/skeleton";
 import { Progress } from "@heroui/progress";
-import { AudioLines, Disc3, Pause, ExternalLink, Copy } from "lucide-react";
+import { Disc3, Pause, ExternalLink } from "lucide-react";
 import { activitiesOfType } from "@/types/lanyard";
 import { GetUserData as _GetUserData } from "@/lib/lanyard";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -209,10 +208,20 @@ export function NowPlayingTile({
     );
 }
 
-function TileSkeleton() {
+function TileSkeleton({
+    card = "",
+    header = "",
+    body = "",
+    size = "",
+}: {
+    card?: string;
+    header?: string;
+    body?: string;
+    size?: string;
+}) {
     return (
-        <Card className="col-span-12 md:col-span-4">
-            <CardBody className="flex items-center gap-4">
+        <Card className={`${size} ${card}`}>
+            <CardBody className={`flex items-center gap-4 ${body}`}>
                 <div className="basis-1/4">
                     <Skeleton className="aspect-square rounded-xl" />
                 </div>

@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Rocket } from "lucide-react";
 
 export default function NotFound() {
-    const [active, setActive] = useState(false);     // show/hide overlay
-    const [launchId, setLaunchId] = useState(0);     // remount to replay
+    const [active, setActive] = useState(false);
+    const [launchId, setLaunchId] = useState(0);
     const timerRef = useRef<NodeJS.Timeout | null>(null);
 
     const triggerLaunch = () => {
