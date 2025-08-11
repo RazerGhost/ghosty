@@ -22,80 +22,65 @@ export default function Home() {
     const body = "pt-3 px-3 md:px-4";
 
     return (
-        <main className="w-full min-h-screen overflow-y-auto px-3 md:px-6 py-4 md:py-6">
-            <div
-                className="
-                    grid
-                    grid-cols-1
-                    auto-rows-auto
-                    gap-3
-                    md:grid-cols-12
-                    md:grid-rows-[repeat(3,minmax(0,1fr))]
-                    md:grid-flow-dense
-                    md:gap-3
-                    h-auto
-                    md:h-full
-                "
-            >
-                {/* About (1) */}
-                <AboutTile card={card} size="col-span-12 md:col-span-4" />
+        <>
+            {/* About (1) */}
+            <AboutTile card={card} size="col-span-12 md:col-span-4" />
 
-                <div className="col-span-12 md:col-span-3 grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-3 items-stretch min-h-0">
-                    <NowPlayingTile
-                        card={`${card} h-full`}
-                        header={header}
-                        body={body}
-                        size="col-span-1 md:col-span-4"
-                    />
-                    <VerseOfTheDayTile
-                        card={`${card} h-full`}
-                        header={header}
-                        body={body}
-                        size="col-span-1 md:col-span-4"
-                    />
-                </div>
-
-                {/* Music Stats (6) */}
-                <MusicStatsTile card={card} header={header} body={body} size="col-span-12 md:col-span-3" />
-
-                {/* Theme (7) */}
-                <TimeThemeTile card={card} header={header} body={body} size="col-span-12 md:col-span-2" />
-
-                {/* Discord (2) */}
-                <DiscordActivityTile card={card} header={header} body={body} size="col-span-12 md:col-span-4" />
-
-                {/* Socials (5) */}
-                <SocialsTile size="col-span-12 md:col-span-3 grid grid-cols-4 md:grid-cols-3 gap-3" />
-
-                {/* Weather (4) */}
-                <WeatherMini card={card} header={header} body={body} size="col-span-12 md:col-span-3" />
-
-                <GhostyTile card={card} size="hidden md:col-span-2 md:block" />
-
-                {/* GitHub (8) */}
-                <GithubStatsTile card={card} header={header} body={body} size="col-span-12 md:col-span-3" />
-
-                {/* Projects (3) */}
-                <ProjectsTile size="col-span-12 md:col-span-3" card={card} header={header} body={body} />
-
-                <div className="col-span-12 md:col-span-3 grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-3 items-stretch min-h-0">
-                    <QuickLinksTile
-                        card={card}
-                        header={header}
-                        body={body}
-                        size="col-span-1 md:col-span-4"
-                    />
-                    <TechStackTile
-                        card={`${card} h-full`}
-                        header={header}
-                        body={body}
-                        size="col-span-1 md:col-span-4"
-                    />
-                </div>
-
-                {/* Business (9) */}
-                <BusinessCardTile card={card} header={header} body={body} size="col-span-12 md:col-span-3" />
+            <div className="col-span-12 md:col-span-3 grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-3 items-stretch min-h-0">
+                <NowPlayingTile
+                    card={`${card} h-full`}
+                    header={header}
+                    body={body}
+                    size="col-span-1 md:col-span-4"
+                />
+                <VerseOfTheDayTile
+                    card={`${card} h-full`}
+                    header={header}
+                    body={body}
+                    size="col-span-1 md:col-span-4"
+                />
             </div>
-        </main>
+
+            {/* Music Stats (6) */}
+            <MusicStatsTile card={card} header={header} body={body} size="col-span-12 md:col-span-3" />
+
+            {/* Theme (7) */}
+            <TimeThemeTile card={card} header={header} body={body} size="col-span-12 md:col-span-2" />
+
+            {/* Discord (2) */}
+            <DiscordActivityTile card={card} header={header} body={body} size="col-span-12 md:col-span-4" />
+
+            {/* Socials (5) */}
+            <SocialsTile size="col-span-12 md:col-span-3 grid grid-cols-4 md:grid-cols-3 gap-3" />
+
+            {/* Weather (4) */}
+            <WeatherMini card={card} header={header} body={body} size="col-span-12 md:col-span-3" />
+
+            <GhostyTile card={card} size="hidden md:col-span-2 md:block" />
+
+            {/* GitHub (8) */}
+            <GithubStatsTile card={card} header={header} body={body} size="col-span-12 md:col-span-3" />
+
+            {/* Projects (3) */}
+            <ProjectsTile size="col-span-12 md:col-span-3" card={card} header={header} body={body} />
+
+            <div className="col-span-12 md:col-span-3 grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-3 items-stretch min-h-0">
+                <QuickLinksTile
+                    card={card}
+                    header={header}
+                    body={body}
+                    size="col-span-1 md:col-span-4"
+                />
+                <TechStackTile
+                    card={`${card} h-full`}
+                    header={header}
+                    body={body}
+                    size="col-span-1 md:col-span-4"
+                />
+            </div>
+
+            {/* Business (9) */}
+            <BusinessCardTile card={card} header={header} body={body} size="col-span-12 md:col-span-3" />
+        </>
     );
 }

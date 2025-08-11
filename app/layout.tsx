@@ -35,16 +35,28 @@ export default function RootLayout({
             <head />
             <body
                 className={clsx(
-                    "min-h-screen text-foreground bg-background font-sans antialiased",
+                    "text-foreground bg-background font-sans antialiased",
                     fontSans.variable,
                 )}
             >
                 <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-                    <div className="relative flex flex-col min-h-screen">
-                        <main className="flex-1">
+                    <div className="min-h-dvh flex items-center justify-center px-3 md:px-6 py-4 md:py-6">
+                        <main
+                            className="
+                                    grid
+                                    grid-cols-1
+                                    auto-rows-auto
+                                    gap-3
+                                    md:grid-cols-12
+                                    md:grid-rows-[repeat(3,minmax(0,1fr))]
+                                    md:grid-flow-dense
+                                    md:gap-3
+                                "
+                        >
                             {children}
                         </main>
                     </div>
+
                 </Providers>
             </body>
         </html>

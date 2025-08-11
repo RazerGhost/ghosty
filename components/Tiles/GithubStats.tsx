@@ -36,7 +36,7 @@ export function GithubStatsTile({
                     Contribution heatmap placeholder
                 </div>
                 <div className="mt-auto flex justify-end">
-                    <Link href="https://github.com/" target="_blank">
+                    <Link href="https://github.com/RazerGhost" target="_blank">
                         <Button size="sm" variant="bordered" endContent={<PanelsTopLeft size={16} />}>View Profile</Button>
                     </Link>
                 </div>
