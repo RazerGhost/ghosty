@@ -9,14 +9,20 @@ export function QuickLinksTile({
         { href: "/about", label: "About" },
         { href: "https://rg-digital.xyz", label: "RG-Digital", ext: true },
     ],
-    className = ""
+    card = "",
+    header = "",
+    body = "",
+    size = ""
 }: {
     links?: { href: string; label: string; ext?: boolean }[];
-    className?: string;
+    card?: string;
+    header?: string;
+    body?: string;
+    size?: string;
 }) {
     return (
-        <Card className={`rounded-2xl h-full border border-foreground/10 ${className}`}>
-            <CardBody className="grid grid-cols-2 gap-2">
+        <Card className={`${size} rounded-2xl h-full border border-foreground/10 ${card}`}>
+            <CardBody className={`grid grid-cols-2 gap-2 ${body}`}>
                 {links.map((l) => (
                     <Link
                         key={l.label}

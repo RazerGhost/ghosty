@@ -4,15 +4,15 @@ import { Button } from "@heroui/button";
 import { Chip } from "@heroui/chip";
 import { MapPin, Briefcase, FileText, Mail } from "lucide-react";
 
-export function AboutTile({ card = "" }: { card?: string }) {
+export function AboutTile({ card = "", header = "", body = "", size = "" }: { card?: string; header?: string; body?: string; size?: string }) {
     return (
         <Card
-            className={`col-span-12 md:col-span-3 relative overflow-hidden ${card} group`}
+            className={`${size} relative overflow-hidden ${card} group`}
         >
             {/* soft primary wash on hover */}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
-            <CardBody className="h-full flex flex-col justify-center gap-3 relative z-10">
+            <CardBody className={`h-full flex flex-col justify-center gap-3 relative z-10 ${body}`}>
                 {/* Heading */}
                 <div>
                     <h1 className="text-[clamp(20px,2.4vw,24px)] font-semibold leading-tight">

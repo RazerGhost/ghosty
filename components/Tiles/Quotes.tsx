@@ -12,7 +12,7 @@ const QUOTES = [
     { text: "Talk is cheap. Show me the code.", author: "Linus Torvalds" },
 ];
 
-export function QuotesTile({ className = "" }: { className?: string }) {
+export function QuotesTile({ card = "", header = "", body = "", size = "" }: { card?: string; header?: string; body?: string; size?: string }) {
     const [index, setIndex] = React.useState(0);
 
     React.useEffect(() => {
@@ -25,8 +25,8 @@ export function QuotesTile({ className = "" }: { className?: string }) {
     const { text, author } = QUOTES[index];
 
     return (
-        <Card className={`col-span-12 md:col-span-1 ${className}`}>
-            <CardBody className="h-full flex flex-col items-center justify-center text-center gap-2 p-3">
+        <Card className={`${size} ${card}`}>
+            <CardBody className={`h-full flex flex-col items-center justify-center text-center gap-2 p-3 ${body}`}>
                 <Quote size={18} className="opacity-60" />
                 <p className="text-xs italic leading-snug">"{text}"</p>
                 <span className="text-[10px] text-foreground/60">— {author}</span>

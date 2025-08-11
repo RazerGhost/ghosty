@@ -6,16 +6,18 @@ export function ProjectsTile({
     card = "",
     header = "",
     body = "",
+    size = "",
 }: {
     card?: string;
     header?: string;
     body?: string;
+    size?: string;
 }) {
     return (
-        <Card className={`col-span-12 md:col-span-3 ${card} relative overflow-hidden`}>
-            <div className="pointer-events-none absolute -right-6 -top-6 opacity-10">
+        <Card className={`${size} ${card} relative overflow-hidden`}>
+            {/* <div className="pointer-events-none absolute -right-6 -top-6 opacity-10">
                 <Rocket size={80} />
-            </div>
+            </div> */}
             <CardHeader className={header}>
                 <div className="flex items-center gap-2">
                     <Rocket size={18} />

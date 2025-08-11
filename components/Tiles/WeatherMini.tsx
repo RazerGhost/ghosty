@@ -5,7 +5,10 @@ import { Card, CardBody, CardHeader } from "@heroui/card";
 
 // props let you hardcode or fetch later
 type Props = {
-    className?: string;
+    card?: string;
+    header?: string;
+    body?: string;
+    size?: string;
     city?: string;
     tempC?: number;
     summary?: string;     // e.g. "Clear", "Overcast"
@@ -13,19 +16,22 @@ type Props = {
 };
 
 export function WeatherMini({
-    className = "",
+    card = "",
+    header = "",
+    body = "",
+    size = "",
     city = "Amsterdam",
     tempC = 18,
     summary = "Clear",
     icon,
 }: Props) {
     return (
-        <Card className={`col-span-12 md:col-span-2 relative overflow-hidden ${className}`}>
+        <Card className={`relative overflow-hidden ${size} ${card}`}>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
-            <CardHeader className="pb-0 pt-3 px-3 md:px-4">
+            <CardHeader className={`pb-0 pt-3 px-3 md:px-4 ${header}`}>
                 <span className="text-sm font-medium">Weather</span>
             </CardHeader>
-            <CardBody className="pt-3 px-3 md:px-4 relative z-10">
+            <CardBody className={`pt-3 px-3 md:px-4 relative z-10 ${body}`}>
                 <div className="flex items-center justify-between">
                     <div className="min-w-0">
                         <div className="text-sm font-semibold truncate">{city}</div>

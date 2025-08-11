@@ -5,14 +5,16 @@ export function ThemeToggleTile({
     card = "",
     header = "",
     body = "",
+    size = "",
 }: {
     card?: string;
     header?: string;
     body?: string;
+    size?: string;
 }) {
     return (
-        <Card className={`col-span-6 md:col-span-2 ${card}`}>
-            <CardBody className="h-full grid place-items-center">
+        <Card className={`${size} ${card}`}>
+            <CardBody className={`h-full grid place-items-center ${body}`}>
                 <ThemeSwitch />
             </CardBody>
         </Card>
