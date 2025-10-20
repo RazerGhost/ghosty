@@ -52,6 +52,8 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+  "@eslint/js": "9.38.0",
+  "@eslint/eslintrc": "3.3.1",
     "@eslint/compat": "^1.4.0",
     "@next/eslint-plugin-next": "15.5.4",
     "@react-types/shared": "3.32.1",
